@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html{
+    background: url("http://subtlepatterns.com/patterns/paper_2.png");
+}
+
+body {
+    font-family: "Arial",sans-serif;
+    line-height: 1.3;
+    text-align: center;
+}
+
+h1{
+    font-weight: 900;
+    font-size: 140px;
+    color: rgb(50,50,50);
+    text-shadow: 0 2px 2px white;
+    margin-bottom: 20px;
+}
+
+p{
+    font-size: 24px;
+    font-family: "Times New Roman",serif;
+    text-shadow: 0 1px 1px white;
+}
+
+
+
+#generator{
+    margin: 40px;
+}
+
+#preview{
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(0,0,0,0.2);
+}
+
+form{
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+
+label{
+    text-align: right;
+    display: block;
+    width: 280px
+}
+
+input{
+    margin-left: 20px;
+}
+
+#shadow{
+    margin-right: 115px;
+}
+
+
+
+
+
+textarea{
+    display: inline-block;
+    width: 500px;
+    height: 60px;
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2);
+
+}
