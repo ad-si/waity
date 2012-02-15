@@ -1,3 +1,6 @@
+@import url(http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister);
+
+
 * {
     margin: 0;
     padding: 0;
@@ -15,15 +18,16 @@ body {
 }
 
 h1{
+    font-family: "Love Ya Like A Sister",sans-serif;
     font-weight: 900;
-    font-size: 140px;
+    font-size: 150px;
     color: rgb(50,50,50);
     text-shadow: 0 2px 2px white;
     margin-bottom: 20px;
 }
 
 p{
-    font-size: 24px;
+    font-size: 25px;
     font-family: "Times New Roman",serif;
     text-shadow: 0 1px 1px white;
 }
