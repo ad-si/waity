@@ -7,22 +7,28 @@
 </head>
 <body>
 <h1>waity</h1>
+
 <p>Waity is an loading spinner generator easy as 1-2-3.<br/>
 	Customise your spinner, copy the code, insert it.</p>
 
 <div id="generator">
-	<div id="preview"></div>
+	<div id="preview">
+		<img src="" id="spinner" alt="spinner"/>
+	</div>
 	<form>
-		<label>Lines<input id="lines" type="range" min="0" max="20"/></label>
-		<label>Outer Radius<input id="outerRadius" type="range" min="0" max="20"/></label>
-		<label>Inner Radius<input id="innerRadius" type="range" min="0" max="20"/></label>
-		<label>Width<input id="width" type="range" min="0" max="20"/></label>
-		<label>Speed<input id="speed" type="range" min="0" max="20"/></label>
-		<label>Shadow<input id="shadow" type="checkbox"/></label>
+		<label>Lines:           <span>12</span> <input id="lines" type="range" value="12" min="3" max="20"/></label>
+		<label>Outer Radius:    <span>30</span> <input id="outerRadius" type="range" value="30" min="0" max="50"/></label>
+		<label>Inner Radius:    <span>10</span> <input id="innerRadius" type="range" value="10" min="0" max="50"/></label>
+		<label>Width:           <span>3</span>  <input id="width" type="range" value="3" min="0" max="10"/></label>
+		<label>Speed:           <span>1</span>  <input id="speed" type="range" value="1" min="0" max="5"/></label>
+		<br />
+		<label>Shadow: <input id="shadow" type="checkbox"/></label>
 	</form>
 </div>
 
-<textarea id="output"></textarea>
+<textarea id="output">
+	<img id="waity" src="" alt="waity"/>
+</textarea>
 
 <script src="waity.js"></script>
 </body>
