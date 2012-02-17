@@ -1,6 +1,5 @@
 @import url(http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister);
 
-
 * {
     margin: 0;
     padding: 0;
@@ -10,77 +9,88 @@
     box-sizing: border-box;
 }
 
-html{
+html {
     background: url("http://subtlepatterns.com/patterns/paper_2.png");
 }
 
 body {
-    font-family: "Arial",sans-serif;
+    font-family: "Arial", sans-serif;
     line-height: 1.3;
     text-align: center;
     font-size: 16px;
 }
 
-h1{
-    font-family: "Love Ya Like A Sister",sans-serif;
+h1 {
+    font-family: "Love Ya Like A Sister", sans-serif;
     font-weight: 500;
     font-size: 150px;
-    color: rgb(50,50,50);
+    color: rgb(50, 50, 50);
     text-shadow: 0 2px 2px white;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
-p{
+p {
     font-size: 25px;
-    font-family: "Times New Roman",serif;
+    font-family: "Times New Roman", serif;
     text-shadow: 0 1px 1px white;
 }
 
-
-
-#generator{
-    margin: 40px;
+#wrapper {
+    width: 600px;
+    margin: 0 auto 50px auto;
 }
 
-#preview{
+#generator {
+    margin: 50px;
+}
+
+#preview {
     display: inline-block;
     vertical-align: top;
-    width: 200px;
-    height: 200px;
-    background-color: rgba(0,0,0,0.2);
+    width: 140px;
+    height: 140px;
+    background-color: rgba(0, 0, 0, 0.2);
+    margin-right: 10px;
 }
 
-form{
+#preview svg{
+    line-height: 200px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+form {
     display: inline-block;
     vertical-align: top;
     text-align: left;
 }
 
-label{
+label {
     text-align: right;
     display: block;
-    width: 280px
+    width: 320px
 }
-label span{
+
+label span:first-of-type {
     font-weight: 900;
     display: inline-block;
-    width: 30px;
+    width: 40px;
+}
+label span:nth-of-type(2) {
+     display: inline-block;
+     width: 20px;
+ }
+
+input {
+    margin-left: 10px;
 }
 
-input{
-    margin-left: 5px;
-}
-
-#shadow{
-    margin-right: 140px;
-    margin-left: 20px;
-}
-
-textarea{
+textarea {
     display: inline-block;
     width: 500px;
-    height: 60px;
     border-radius: 5px;
-    box-shadow: inset 2px 2px 2px rgba(0,0,0,0.2);
-    padding: 20px;
+    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    resize: vertical;
 }
