@@ -4,24 +4,30 @@
         return document.getElementById(id);
     }
 
-    var spinner = {
+    var spinnerProperties = {
         "lines":12,
         "outerRadius":40,
         "innerRadius":18,
         "borderRadius":1,
         "width":5,
         "revolution":1000,
-        "shadow": 0
+        "shadow":0,
+        "continuous": false,
+        "color": "rgb(0,0,0)"
     };
 
-    for (var prop in spinner) {
-        if (spinner.hasOwnProperty(prop)) {
-            $(prop).value = spinner[prop];
+    for (var prop in spinnerProperties) {
+		
+        if (spinnerProperties.hasOwnProperty(prop) && prop != 'continuous' && prop != 'color') {
+		
+			console.log(spinnerProperties)
+			
+            $(prop).value = spinnerProperties[prop];
             $(prop).previousSibling.previousSibling.innerHTML = $(prop).value;
 
             $(prop).addEventListener('change', function () {
-                spinner[this.id] = this.value;
-                buildSpinner(spinner);
+                spinnerProperties[this.id] = Number(this.value);
+                buildSpinner(spinnerProperties);
                 this.previousSibling.previousSibling.innerHTML = this.value;
             });
         }
@@ -29,82 +35,54 @@
 
 
     function buildSpinner(s) {
+			
+		$('preview').innerHTML = '';
 
-        var wrapper, svg, defs, rect, cont, ani;
+       	DOMinate([$('preview'),
+        	['svg#waity', {'width': 2 * s.outerRadius, 'height': 2 * s.outerRadius},
+        		['defs',
+					['rect#w', {
+						'x':s.innerRadius,
+						'y':-s.width / 2,
+						'rx':s.borderRadius,
+						'ry':s.borderRadius,
+						'width':Math.abs(s.outerRadius - s.innerRadius),
+						'height':s.width,
+						'fill': s.color}
+					]
+				],
+            	['g#spinnerContainer', {'transform':'translate(' + (s.outerRadius) + ', ' + (s.outerRadius) + ')'},
+            		['animateTransform#spinnerAnimation',{
+						'attributeName':'transform',
+						'calcMode':((s.continuous) ? 'linear' : 'discrete'),
+						'type': 'rotate',
+						'by': 360 / s.lines,
+						'accumulate':"sum",
+						'dur': Math.round(s.revolution / s.lines) + 'ms',
+						'repeatCount': 'indefinite'}
+					]				 		
+            	]
+        	]
+        ], 'http://www.w3.org/2000/svg');
+		
 
-        function attr(obj, attributes) {
-            for (prop in attributes) {
-                obj.setAttribute(prop, attributes[prop]);
-            }
+        for (var i = 0; i < s.lines; i++) {
+			var use = DOMinate(
+				['use',{
+                	'transform':'rotate(' + (i * 360 / s.lines) + ')',
+                	'opacity': Math.round(100 / s.lines * (i+1)) / 100}
+				 ],
+			'http://www.w3.org/2000/svg')
+				
+       		use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#w");
+				 
+            $('spinnerContainer').appendChild(use);
         }
-
-        wrapper = document.createElement('div');
-
-        svg = document.createElement('svg');
-        attr(svg, {
-            'width':s.outerRadius * 2,
-            'height':s.outerRadius * 2,
-            'xmlns':'http://www.w3.org/2000/svg',
-            'xmlns:xlink':'http://www.w3.org/1999/xlink'});
-        wrapper.appendChild(svg);
-
-        defs = document.createElement('defs');
-        svg.appendChild(defs);
-
-        rect = document.createElement('rect');
-        attr(rect, {'id':'l',
-            'x':s.innerRadius,
-            'y':-s.width / 2,
-            'rx':s.borderRadius,
-            'ry':s.borderRadius,
-            'width':Math.abs(s.outerRadius - s.innerRadius),
-            'height':s.width,
-            'fill':'#000'
-        });
-        defs.appendChild(rect);
-
-        cont = document.createElement('g');
-        cont.setAttribute('transform', 'translate(' + (s.outerRadius) + ', ' + (s.outerRadius) + ')');
-        svg.appendChild(cont);
-
-        ani = document.createElement('animateTransform');
-        attr(ani, {
-            'attributeName':'transform',
-            'calcMode':'discrete',
-            'type':'rotate',
-            'values':'0;30;60;90;120;150;180;210;240;270;300;330;360',
-            'additive':'sum',
-            'dur':s.revolution + 'ms',
-            'repeatDur':'indefinite'
-        });
-        cont.appendChild(ani);
-
-        for (var i = 0; i < $('lines').value; i++) {
-
-            var use = document.createElement('use');
-            attr(use, {
-                'xlink:href':'#l',
-                'transform':'rotate(' + (i * 30) + ')',
-                'opacity':Math.round(1 / $('lines').value * i * 100) / 100
-            });
-
-            cont.appendChild(use);
-        }
-
-        var source = encodeURI('data:image/svg+xml,' + '<?xml version="1.0" encoding="utf-8"?>' + wrapper.innerHTML);
-
-        //$('spinner').src = source;
-        //$('spinner').width = $('outerRadius').value * 2;
-        //$('spinner').height = $('outerRadius').value * 2;
-
-        $('preview').innerHTML = wrapper.innerHTML;
-
-
-        var code = '<img height="' + s.outerRadius + '" width="' + s.outerRadius + '" src="' + source + '"/>';
-        $('output').innerHTML = code;
+        
+        $('output').innerHTML = $('preview').innerHTML; //.replace(/[\n\t]/g, '');
     }
 
-    buildSpinner(spinner);
+    buildSpinner(spinnerProperties);
 
 
 })(window, document)
