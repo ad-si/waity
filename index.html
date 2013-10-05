@@ -1,43 +1,69 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-	<meta charset="UTF-8">
-	<title>waity</title>
-	<link rel="stylesheet" type="text/css" href="waity.css"/>
-	<script src="//gitcdn.org/libs/dominate/1.1.0/index.min.js"></script>
+    <meta charset="UTF-8">
+    <title>waity</title>
+    <link rel="stylesheet" type="text/css" href="waity.css"/>
 </head>
 <body>
 <div id="wrapper">
-	<h1>waity</h1>
+    <h1>waity</h1>
 
-	<p>Waity is a loading spinner generator easy as 1-2-3.<br/>
-		Customise your spinner, copy the code, insert it.</p>
+    <p>Waity is a loading spinner generator easy as 1-2-3.<br/>
+        Customise your spinner, copy the code, insert it.</p>
 
-	<div id="generator">
-		<div id="preview">
-			<img src="" id="spinner" alt="spinner"/>
-		</div>
-		<form>
-			<label>Lines: <span></span><span></span><input id="lines" type="range" min="3" max="20"/></label>
-			<label>Outer Radius: <span></span><span>px</span><input id="outerRadius" type="range" min="0"
-			                                                        max="50"/></label>
-			<label>Inner Radius: <span></span><span>px</span><input id="innerRadius" type="range" min="0"
-			                                                        max="50"/></label>
-			<label>Border Radius: <span></span><span>px</span><input id="borderRadius" type="range" min="0"
-			                                                         max="20"/></label>
-			<label>Width: <span></span><span>px</span><input id="width" type="range" min="0"
-			                                                 max="20"/></label>
-			<label>Revolution: <span></span><span>ms</span><input id="revolution" type="range" min="0"
-			                                                      max="5000"/></label>
-			<label>Shadow: <span></span><span>px</span><input id="shadow" type="range" min="0" max="10"/></label>
-		</form>
-	</div>
+    <div id="generator">
+        <div id="preview">
+            <img src="" id="spinner" alt="spinner"/>
+        </div>
+        <form>
+            <label for="lines">Lines:</label>
+            <span></span>
+            <span></span>
+            <input id="lines" type="range" min="3" max="20"/>
+            <br>
 
-	<textarea id="output">
-		<img id="waity" src="" alt="waity"/>
-	</textarea>
+            <label for="outerRadius">Outer Radius:</label>
+            <span></span>
+            <span>px</span>
+            <input id="outerRadius" type="range" min="0" max="50"/>
+            <br>
 
-	<script src="waity.js"></script>
+            <label for="innerRadius">Inner Radius:</label>
+            <span></span>
+            <span>px</span>
+            <input id="innerRadius" type="range" min="0" max="50"/>
+            <br>
+
+            <label for="borderRadius">Border Radius:</label>
+            <span></span>
+            <span>px</span>
+            <input id="borderRadius" type="range" min="0" max="20"/>
+            <br>
+
+            <label for="width">Width:</label>
+            <span></span>
+            <span>px</span>
+            <input id="width" type="range" min="0" max="20"/>
+            <br>
+
+            <label for="revolution">Revolution:</label>
+            <span></span>
+            <span>ms</span>
+            <input id="revolution" type="range" min="0" max="5000"/>
+            <br>
+
+            <label for="shadow">Shadow:</label>
+            <span></span>
+            <span>px</span>
+            <input id="shadow" type="range" min="0" max="10"/>
+        </form>
+    </div>
+
+    <textarea id="output"></textarea>
+
+    <script src="//gitcdn.org/libs/dominate/1.1.0/index.min.js"></script>
+    <script src="waity.js"></script>
 </div>
 </body>
 </html>
