@@ -27,7 +27,13 @@
 
 		DOMinate(
 			[preview,
-				['svg#waity', {'width': 2 * s.outerRadius, 'height': 2 * s.outerRadius},
+				['svg#waity',
+					{
+						width: 2 * s.outerRadius,
+						height: 2 * s.outerRadius,
+						xmlns: 'http://www.w3.org/2000/svg',
+						'xmlns:xlink': 'http://www.w3.org/1999/xlink',
+					},
 					['defs',
 						['rect#w', {
 							'x': s.innerRadius,
@@ -71,7 +77,13 @@
 			$('spinnerContainer').appendChild(use)
 		}
 
-		$('output').innerHTML = preview.innerHTML //.replace(/[\n\t]/g, '')
+
+		$('output').textContent = preview
+			.innerHTML
+			.replace(
+				new RegExp('xmlns:xlink=".{28}" xlink', 'gi'),
+				'xlink'
+			)
 	}
 
 
