@@ -5,15 +5,15 @@
 	}
 
 	var spinnerProperties = {
-			"lines": 12,
-			"outerRadius": 40,
-			"innerRadius": 18,
-			"borderRadius": 1,
-			"width": 5,
-			"revolution": 1000,
-			"shadow": 0,
-			"continuous": false,
-			"color": "rgb(0,0,0)"
+			lines: 12,
+			outerRadius: 40,
+			innerRadius: 18,
+			borderRadius: 1,
+			width: 5,
+			revolution: 1000,
+			shadow: 0,
+			continuous: false,
+			color: 'rgb(0,0,0)',
 		},
 		prop
 
@@ -36,24 +36,30 @@
 					},
 					['defs',
 						['rect#w', {
-							'x': s.innerRadius,
-							'y': -s.width / 2,
-							'rx': s.borderRadius,
-							'ry': s.borderRadius,
-							'width': Math.abs(s.outerRadius - s.innerRadius),
-							'height': s.width,
-							'fill': s.color}
+							x: s.innerRadius,
+							y: -s.width / 2,
+							rx: s.borderRadius,
+							ry: s.borderRadius,
+							width: Math.abs(s.outerRadius - s.innerRadius),
+							height: s.width,
+							fill: s.color},
 						]
 					],
-					['g#spinnerContainer', {'transform': 'translate(' + (s.outerRadius) + ', ' + (s.outerRadius) + ')'},
+					['g#spinnerContainer',
+						{
+							transform: 'translate(' + (s.outerRadius) + ', ' +
+								(s.outerRadius) + ')'
+						},
 						['animateTransform#spinnerAnimation', {
-							'attributeName': 'transform',
-							'calcMode': ((s.continuous) ? 'linear' : 'discrete'),
-							'type': 'rotate',
-							'by': 360 / s.lines,
-							'accumulate': "sum",
-							'dur': Math.round(s.revolution / s.lines) + 'ms',
-							'repeatCount': 'indefinite'}
+							attributeName: 'transform',
+							calcMode: s.continuous ?
+								'linear' :
+								'discrete',
+							type: 'rotate',
+							by: 360 / s.lines,
+							accumulate: 'sum',
+							dur: Math.round(s.revolution / s.lines) + 'ms',
+							repeatCount: 'indefinite'}
 						]
 					]
 				]
@@ -66,13 +72,13 @@
 
 			use = DOMinate(
 				['use', {
-					'transform': 'rotate(' + (i * 360 / s.lines) + ')',
-					'opacity': Math.round(100 / s.lines * (i + 1)) / 100}
+					transform: 'rotate(' + (i * 360 / s.lines) + ')',
+					opacity: Math.round(100 / s.lines * (i + 1)) / 100},
 				],
 				'http://www.w3.org/2000/svg'
 			)[0]
 
-			use.setAttributeNS("http://www.w3.org/1999/xlink", "href", "#w")
+			use.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#w')
 
 			$('spinnerContainer').appendChild(use)
 		}
