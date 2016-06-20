@@ -1,8 +1,12 @@
 {
   "name": "waity",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Waity is a loading spinner generator easy as 1-2-3. Customise your spinner, copy the code, insert it.",
-  "main": "waity.js",
+  "main": "source/index.js",
+  "scripts": {
+    "lint": "eslint source",
+    "test": "npm run lint"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/adius/waity.git"
@@ -15,5 +19,16 @@
   "bugs": {
     "url": "https://github.com/adius/waity/issues"
   },
-  "homepage": "https://github.com/adius/waity#readme"
+  "homepage": "https://github.com/adius/waity#readme",
+  "dependencies": {
+    "shaven": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "~2.12.0",
+    "javascript-styleguide": "^0.2.2"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": "./node_modules/javascript-styleguide/.eslintrc.yaml"
+  }
 }
