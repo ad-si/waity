@@ -1,15 +1,12 @@
 {
   "name": "waity",
   "version": "0.1.0",
-  "description": "Waity is a loading spinner generator easy as 1-2-3. Customise your spinner, copy the code, insert it.",
-  "main": "source/index.js",
-  "scripts": {
-    "lint": "eslint source",
-    "test": "npm run lint"
-  },
+  "type": "module",
+  "description": "Waity is a loading spinner generator easy as 1-2-3. Customize your spinner, copy the code, insert it.",
+  "main": "dist/index.html",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adius/waity.git"
+    "url": "git+https://github.com/ad-si/waity.git"
   },
   "keywords": [
     "loading spinner"
@@ -17,18 +14,20 @@
   "author": "Adrian Sieber",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/adius/waity/issues"
+    "url": "https://github.com/ad-si/waity/issues"
   },
-  "homepage": "https://github.com/adius/waity#readme",
+  "homepage": "https://github.com/ad-si/waity#readme",
   "dependencies": {
-    "shaven": "^1.1.0"
+    "shaven": "^2.1.0"
   },
   "devDependencies": {
-    "eslint": "~2.12.0",
-    "javascript-styleguide": "^0.2.2"
-  },
-  "eslintConfig": {
-    "root": true,
-    "extends": "./node_modules/javascript-styleguide/.eslintrc.yaml"
+    "@types/node": "^24.8.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.1",
+    "@typescript-eslint/parser": "^8.46.1",
+    "eslint": "^9.38.0",
+    "eslint-config-javascript": "^3.0.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.10",
+    "vite-plugin-singlefile": "^2.3.0"
   }
 }

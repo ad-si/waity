@@ -1,11 +1,9 @@
-@import url(http://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister);
+@import url(https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister);
 
 * {
   margin: 0;
   padding: 0;
   border: 0;
-  box-sizing: -moz-border-box;
-  box-sizing: -webkit-border-box;
   box-sizing: border-box;
 }
 
