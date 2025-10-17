@@ -166,7 +166,7 @@ copyButton.addEventListener("click", async () => {
       copyButton.classList.remove("copied")
     }, 2000)
   }
-  catch (error) {
+  catch {
     // Fallback for older browsers
     output.select()
     document.execCommand("copy")
