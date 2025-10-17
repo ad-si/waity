@@ -39,7 +39,7 @@ function buildSpinner (config: SpinnerConfig): void {
 
   shaven([
     preview,
-    ["svg#waity",
+    ["svg.waity-spinner",
       {
         width: 2 * config.outerRadius,
         height: 2 * config.outerRadius,
@@ -102,6 +102,10 @@ function buildSpinner (config: SpinnerConfig): void {
       new RegExp('xmlns:xlink=".{28}" xlink', "gi"),
       "xlink",
     )
+
+  // Auto-resize textarea to fit content
+  output.style.height = "auto"
+  output.style.height = output.scrollHeight + "px"
 }
 
 
@@ -119,7 +123,7 @@ for (const prop in spinnerProperties) {
       valueDisplay.textContent = String(inputElement.value)
     }
 
-    inputElement.addEventListener("change", event => {
+    inputElement.addEventListener("input", event => {
       const element = event.currentTarget as HTMLInputElement
       const key = element.id as keyof SpinnerConfig
       const value = element.value
@@ -144,3 +148,35 @@ for (const prop in spinnerProperties) {
 }
 
 buildSpinner(spinnerProperties)
+
+// Copy button functionality
+const copyButton = getElById("copyButton") as HTMLButtonElement
+copyButton.addEventListener("click", async () => {
+  const output = getElById("output") as HTMLTextAreaElement
+
+  try {
+    await navigator.clipboard.writeText(output.value)
+
+    // Visual feedback
+    copyButton.textContent = "Copied!"
+    copyButton.classList.add("copied")
+
+    setTimeout(() => {
+      copyButton.textContent = "Copy Code"
+      copyButton.classList.remove("copied")
+    }, 2000)
+  }
+  catch (error) {
+    // Fallback for older browsers
+    output.select()
+    document.execCommand("copy")
+
+    copyButton.textContent = "Copied!"
+    copyButton.classList.add("copied")
+
+    setTimeout(() => {
+      copyButton.textContent = "Copy Code"
+      copyButton.classList.remove("copied")
+    }, 2000)
+  }
+})

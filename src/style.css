@@ -89,11 +89,39 @@ input {
 #output {
   display: inline-block;
   width: 500px;
-  height: 260px;
+  min-height: 100px;
   border-radius: 4px;
   padding: 15px 20px;
-  resize: vertical;
-  color: rgb(160, 160, 160)
+  resize: none;
+  color: rgb(160, 160, 160);
+  font-size: 11px;
+  font-family: monospace;
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+#copyButton {
+  display: block;
+  margin: 10px auto 0 auto;
+  padding: 10px 20px;
+  background-color: rgb(160, 160, 160);
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#copyButton:hover {
+  background-color: rgb(140, 140, 140);
+}
+
+#copyButton:active {
+  background-color: rgb(120, 120, 120);
+}
+
+#copyButton.copied {
+  background-color: rgb(40, 150, 40);
 }
 
 
