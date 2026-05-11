@@ -124,42 +124,48 @@ function buildSpinner (config: SpinnerConfig): void {
 }
 
 
-for (const prop in spinnerProperties) {
-  if (!Object.prototype.hasOwnProperty.call(spinnerProperties, prop)) continue
+interface InputBinding {
+  inputId: string
+  configKey: keyof SpinnerConfig
+  // Multiplier from config value to GUI display value.
+  // Diameter sliders use 2 so users see diameter while config stores radius.
+  displayFactor: number
+}
 
-  if (prop !== "continuous" && prop !== "color" && prop !== "setSize") {
-    const inputElement = getElById(prop) as HTMLInputElement
+const inputBindings: InputBinding[] = [
+  {inputId: "lines", configKey: "lines", displayFactor: 1},
+  {inputId: "outerDiameter", configKey: "outerRadius", displayFactor: 2},
+  {inputId: "innerDiameter", configKey: "innerRadius", displayFactor: 2},
+  {inputId: "borderRadius", configKey: "borderRadius", displayFactor: 1},
+  {inputId: "width", configKey: "width", displayFactor: 1},
+  {inputId: "revolution", configKey: "revolution", displayFactor: 1},
+]
 
-    const propValue = spinnerProperties[prop as keyof SpinnerConfig]
-    inputElement.value = String(propValue)
-    const prevSibling = inputElement.previousElementSibling
-    if (prevSibling?.previousElementSibling) {
-      const valueDisplay = prevSibling.previousElementSibling
-      valueDisplay.textContent = String(inputElement.value)
-    }
-
-    inputElement.addEventListener("input", event => {
-      const element = event.currentTarget as HTMLInputElement
-      const key = element.id as keyof SpinnerConfig
-      const value = element.value
-
-      // Type-safe assignment based on property type
-      type ConfigRecord = Record<string, number | string | boolean>
-      if (typeof spinnerProperties[key] === "number") {
-        (spinnerProperties as ConfigRecord)[key] = Number(value)
-      }
-      else {
-        (spinnerProperties as ConfigRecord)[key] = value
-      }
-
-      buildSpinner(spinnerProperties)
-      const elementPrevSibling = element.previousElementSibling
-      if (elementPrevSibling?.previousElementSibling) {
-        const elementValueDisplay = elementPrevSibling.previousElementSibling
-        elementValueDisplay.textContent = String(element.value)
-      }
-    })
+for (const binding of inputBindings) {
+  const inputElement = getElById(binding.inputId) as HTMLInputElement
+  const configValue = spinnerProperties[binding.configKey] as number
+  const displayValue = configValue * binding.displayFactor
+  inputElement.value = String(displayValue)
+  const prevSibling = inputElement.previousElementSibling
+  if (prevSibling?.previousElementSibling) {
+    const valueDisplay = prevSibling.previousElementSibling
+    valueDisplay.textContent = String(displayValue)
   }
+
+  inputElement.addEventListener("input", event => {
+    const element = event.currentTarget as HTMLInputElement
+    const newDisplayValue = Number(element.value)
+    type ConfigRecord = Record<string, number | string | boolean>
+    ;(spinnerProperties as ConfigRecord)[binding.configKey] =
+      newDisplayValue / binding.displayFactor
+
+    buildSpinner(spinnerProperties)
+    const elementPrevSibling = element.previousElementSibling
+    if (elementPrevSibling?.previousElementSibling) {
+      const elementValueDisplay = elementPrevSibling.previousElementSibling
+      elementValueDisplay.textContent = String(element.value)
+    }
+  })
 }
 
 const setSizeInput = getElById("setSize") as HTMLInputElement
