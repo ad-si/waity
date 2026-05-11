@@ -11,6 +11,7 @@ interface SpinnerConfig {
   revolution: number
   continuous: boolean
   color: string
+  setSize: boolean
 }
 
 const spinnerProperties: SpinnerConfig = {
@@ -22,6 +23,7 @@ const spinnerProperties: SpinnerConfig = {
   revolution: 1000,
   continuous: false,
   color: "rgb(0,0,0)",
+  setSize: true,
 }
 
 function getElById (id: string): HTMLElement {
@@ -37,15 +39,21 @@ function buildSpinner (config: SpinnerConfig): void {
 
   preview.innerHTML = ""
 
+  const size = 2 * config.outerRadius
+  const svgAttributes: Record<string, string | number> = {
+    viewBox: `0 0 ${size} ${size}`,
+    xmlns: "http://www.w3.org/2000/svg",
+    "xmlns:xlink": "http://www.w3.org/1999/xlink",
+  }
+  if (config.setSize) {
+    svgAttributes.width = size
+    svgAttributes.height = size
+  }
+
   shaven([
     preview,
     ["svg.waity-spinner",
-      {
-        width: 2 * config.outerRadius,
-        height: 2 * config.outerRadius,
-        xmlns: "http://www.w3.org/2000/svg",
-        "xmlns:xlink": "http://www.w3.org/1999/xlink",
-      },
+      svgAttributes,
       ["defs",
         ["rect#w", {
           // eslint-disable-next-line id-length
@@ -119,7 +127,7 @@ function buildSpinner (config: SpinnerConfig): void {
 for (const prop in spinnerProperties) {
   if (!Object.prototype.hasOwnProperty.call(spinnerProperties, prop)) continue
 
-  if (prop !== "continuous" && prop !== "color") {
+  if (prop !== "continuous" && prop !== "color" && prop !== "setSize") {
     const inputElement = getElById(prop) as HTMLInputElement
 
     const propValue = spinnerProperties[prop as keyof SpinnerConfig]
@@ -153,6 +161,13 @@ for (const prop in spinnerProperties) {
     })
   }
 }
+
+const setSizeInput = getElById("setSize") as HTMLInputElement
+setSizeInput.checked = spinnerProperties.setSize
+setSizeInput.addEventListener("change", () => {
+  spinnerProperties.setSize = setSizeInput.checked
+  buildSpinner(spinnerProperties)
+})
 
 buildSpinner(spinnerProperties)
 

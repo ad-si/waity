@@ -104,9 +104,19 @@ input {
   cursor: pointer;
 }
 
-#outputControls input[type="radio"] {
+#outputControls input[type="radio"],
+#outputControls input[type="checkbox"] {
   margin: 0 4px 0 0;
   vertical-align: middle;
+}
+
+#outputControls .outputControlsSeparator {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  margin: 0 12px 0 0;
+  vertical-align: middle;
+  background-color: rgb(180, 180, 180);
 }
 
 #output {
