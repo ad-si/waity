@@ -60,6 +60,17 @@
     </form>
   </div>
 
+  <div id="outputControls">
+    <span class="outputControlsLabel">Format:</span>
+    <label>
+      <input type="radio" name="outputFormat" value="svg" checked />
+      SVG
+    </label>
+    <label>
+      <input type="radio" name="outputFormat" value="base64" />
+      Base64 Data URL
+    </label>
+  </div>
   <textarea id="output" readonly></textarea>
   <button id="copyButton">Copy Code</button>
 </div>

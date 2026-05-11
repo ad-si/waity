@@ -86,6 +86,29 @@ input {
   vertical-align: middle;
 }
 
+#outputControls {
+  width: 500px;
+  margin: 0 auto 10px auto;
+  text-align: left;
+}
+
+#outputControls .outputControlsLabel {
+  display: inline-block;
+  margin-right: 12px;
+  font-weight: 900;
+}
+
+#outputControls label {
+  width: auto;
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+#outputControls input[type="radio"] {
+  margin: 0 4px 0 0;
+  vertical-align: middle;
+}
+
 #output {
   display: inline-block;
   width: 500px;
@@ -98,6 +121,7 @@ input {
   font-family: monospace;
   line-height: 1.4;
   overflow: hidden;
+  word-break: break-all;
 }
 
 #copyButton {

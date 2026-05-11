@@ -96,12 +96,19 @@ function buildSpinner (config: SpinnerConfig): void {
 
 
   const output = getElById("output") as HTMLTextAreaElement
-  output.textContent = preview
+  const svgMarkup = preview
     .innerHTML
     .replace(
       new RegExp('xmlns:xlink=".{28}" xlink', "gi"),
       "xlink",
     )
+  const formatInput = document.querySelector<HTMLInputElement>(
+    "input[name=\"outputFormat\"]:checked",
+  )
+  const format = formatInput?.value ?? "svg"
+  output.textContent = format === "base64"
+    ? "data:image/svg+xml;base64," + btoa(svgMarkup)
+    : svgMarkup
 
   // Auto-resize textarea to fit content
   output.style.height = "auto"
@@ -148,6 +155,14 @@ for (const prop in spinnerProperties) {
 }
 
 buildSpinner(spinnerProperties)
+
+document
+  .querySelectorAll<HTMLInputElement>("input[name=\"outputFormat\"]")
+  .forEach(input => {
+    input.addEventListener("change", () => {
+      buildSpinner(spinnerProperties)
+    })
+  })
 
 // Copy button functionality
 const copyButton = getElById("copyButton") as HTMLButtonElement
